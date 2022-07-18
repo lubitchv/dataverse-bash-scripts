@@ -1,6 +1,6 @@
-export API_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-export SERVER_URL=https://borealisdata.ca
-export PERSISTENT_ID=doi:10.5683/SP3/PSWY62
+export API_TOKEN=
+export SERVER_URL=https://demo.borealisdata.ca
+export PERSISTENT_ID=doi:10.80240/FK2/UKKWRJ
 
 IFS=" "
 mkdir -p dataset
@@ -15,7 +15,7 @@ do
     filename="dataset/${newarr[2]}/${newarr[1]}"
     mkdir -p $directory
     echo $filename
-    curl -H "X-Dataverse-key:$API_TOKEN" "$SERVER_URL/api/access/datafile/$id" > "$filename"
+    curl -o "$filename" -L -H "X-Dataverse-key:$API_TOKEN" -X GET "$SERVER_URL/api/access/datafile/$id"
 done
 
 
